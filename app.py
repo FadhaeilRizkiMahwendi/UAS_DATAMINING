@@ -16,7 +16,6 @@ st.set_page_config(page_title="Aplikasi Klasifikasi Data Pasien", layout="wide")
 # Tambahkan Pilihan Tema di Sidebar
 theme = st.sidebar.radio("Pilih Tema Tampilan:", ["Light Mode", "Dark Mode"])
 
-# Styling Custom Berdasarkan Tema
 if theme == "Light Mode":
     st.markdown(
         """
@@ -31,9 +30,15 @@ if theme == "Light Mode":
             margin-bottom: 20px;
         }
 
+        /* Light Mode Background */
+        body {
+            background-color: #ffffff;
+            color: black;
+        }
+
         /* Light Mode Sidebar */
         .sidebar .sidebar-content {
-            background-color: #ffffff;
+            background-color: #f4f4f4;
             color: black;
         }
 
@@ -41,6 +46,11 @@ if theme == "Light Mode":
         div.stButton > button {
             background-color: #4CAF50;
             color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
         }
         div.stButton > button:hover {
             background-color: #45a049;
@@ -48,8 +58,10 @@ if theme == "Light Mode":
 
         /* Footer */
         .footer {
-            background-color: #ffffff;
+            background-color: #f4f4f4;
             color: #888;
+            text-align: center;
+            padding: 10px 20px;
         }
         </style>
         """,
@@ -69,6 +81,12 @@ elif theme == "Dark Mode":
             margin-bottom: 20px;
         }
 
+        /* Dark Mode Background */
+        body {
+            background-color: #121212;
+            color: white;
+        }
+
         /* Dark Mode Sidebar */
         .sidebar .sidebar-content {
             background-color: #333333;
@@ -79,6 +97,11 @@ elif theme == "Dark Mode":
         div.stButton > button {
             background-color: #FFD700;
             color: black;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
         }
         div.stButton > button:hover {
             background-color: #FFA500;
@@ -88,11 +111,14 @@ elif theme == "Dark Mode":
         .footer {
             background-color: #333333;
             color: #ccc;
+            text-align: center;
+            padding: 10px 20px;
         }
         </style>
         """,
         unsafe_allow_html=True,
     )
+
 
 # Tambahkan Informasi Pengembang
 st.sidebar.markdown("## 👨‍💻 Tentang Pengembang")
