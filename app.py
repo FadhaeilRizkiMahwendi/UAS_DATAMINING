@@ -12,78 +12,97 @@ import seaborn as sns
 # --- Konfigurasi Aplikasi ---
 st.set_page_config(page_title="Aplikasi Klasifikasi Data Pasien", layout="wide")
 
-# --- Styling Custom untuk Tampilan ---
-st.markdown(
-    """
-    <style>
-    /* Styling Header */
-    .main-header {
-        font-size: 45px;
-        font-weight: bold;
-        color: #4CAF50;
-        text-align: center;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
 
-    /* Styling Sidebar */
-    .sidebar .sidebar-content {
-        background-color: #f4f4f4;
-        padding: 20px;
-    }
+# Tambahkan Pilihan Tema di Sidebar
+theme = st.sidebar.radio("Pilih Tema Tampilan:", ["Light Mode", "Dark Mode"])
 
-    /* Custom Font */
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-    html, body, [class*="css"] {
-        font-family: 'Roboto', sans-serif;
-    }
+# Styling Custom Berdasarkan Tema
+if theme == "Light Mode":
+    st.markdown(
+        """
+        <style>
+        /* Styling Header */
+        .main-header {
+            font-size: 45px;
+            font-weight: bold;
+            color: #4CAF50;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
 
-    /* Button Styling */
-    div.stButton > button {
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        font-size: 16px;
-        font-weight: bold;
-    }
-    div.stButton > button:hover {
-        background-color: #45a049;
-    }
+        /* Light Mode Sidebar */
+        .sidebar .sidebar-content {
+            background-color: #ffffff;
+            color: black;
+        }
 
-    /* Table Styling */
-    table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-top: 20px;
-    }
-    th, td {
-        text-align: left;
-        padding: 8px;
-        border: 1px solid #ddd;
-    }
-    th {
-        background-color: #4CAF50;
-        color: white;
-    }
+        /* Light Mode Button */
+        div.stButton > button {
+            background-color: #4CAF50;
+            color: white;
+        }
+        div.stButton > button:hover {
+            background-color: #45a049;
+        }
 
-    /* Footer Styling */
-    .footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: #f4f4f4;
-        padding: 10px 20px;
-        text-align: center;
-        font-size: 14px;
-        color: #888;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+        /* Footer */
+        .footer {
+            background-color: #ffffff;
+            color: #888;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+elif theme == "Dark Mode":
+    st.markdown(
+        """
+        <style>
+        /* Styling Header */
+        .main-header {
+            font-size: 45px;
+            font-weight: bold;
+            color: #FFD700;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Dark Mode Sidebar */
+        .sidebar .sidebar-content {
+            background-color: #333333;
+            color: white;
+        }
+
+        /* Dark Mode Button */
+        div.stButton > button {
+            background-color: #FFD700;
+            color: black;
+        }
+        div.stButton > button:hover {
+            background-color: #FFA500;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #333333;
+            color: #ccc;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+# Tambahkan Informasi Pengembang
+st.sidebar.markdown("## 👨‍💻 Tentang Pengembang")
+st.sidebar.markdown("""
+- Nama: Fadhaeil Rizki Mahwendi
+- NIM: 211220095
+- Email: [Email ke saya](mailto:211220095@unmuhpnk.ac.id)
+- Github : [Link Github saya](https://github.com/FadhaeilRizkiMahwendi)
+""")
+
 
 
 # --- File untuk Riwayat Prediksi ---
@@ -181,18 +200,35 @@ menu = st.radio(
 )
 
 
-
-
 # --- Home Page (Visualisasi Dataset) ---
 if menu == "Home":
-    st.write("## Selamat Datang!")
-    st.write("Gunakan navigasi di atas untuk memilih **Training Model**, **Prediksi Data Baru**, atau melihat **Riwayat Prediksi**.")
-    st.write("### Dataset yang Digunakan:")
-    st.dataframe(data.head())
+    st.write("## Selamat Datang di Aplikasi Klasifikasi Data Pasien!")
+    st.write("""
+    Aplikasi ini dirancang untuk membantu Anda melakukan analisis klasifikasi data pasien.
+    Anda dapat menggunakan aplikasi ini untuk:
+    - Melatih model machine learning menggunakan dataset yang Anda miliki.
+    - Melakukan prediksi data pasien baru berdasarkan input tertentu.
+    - Melihat riwayat prediksi sebelumnya.
+    - Melakukan optimisasi model untuk mendapatkan performa terbaik.
+    - Menjelajahi pentingnya fitur-fitur dalam prediksi (Feature Importance).
+    - Mencoba algoritma machine learning model lain untuk di coba
+    
+    Gunakan navigasi di atas untuk mengakses setiap fitur aplikasi. Selamat mencoba! 🎉
+    """)
 
-    # Deskripsi Statistik
-    st.write("### Deskripsi Statistik Dataset:")
-    st.dataframe(data.describe())
+    st.write("### Informasi Dataset yang Digunakan:")
+
+    # Tambahkan dropdown untuk memilih informasi yang ingin dilihat
+    options = ["Tampilkan Dataset", "Deskripsi Statistik Dataset"]
+    selected_option = st.selectbox("Pilih informasi yang ingin dilihat:", options)
+
+    # Tampilkan dataset atau deskripsi statistik berdasarkan pilihan
+    if selected_option == "Tampilkan Dataset":
+        st.write("### Dataset:")
+        st.dataframe(data)  # Menampilkan seluruh dataset
+    elif selected_option == "Deskripsi Statistik Dataset":
+        st.write("### Deskripsi Statistik Dataset:")
+        st.dataframe(data.describe())  # Menampilkan deskripsi statistik
 
     # Visualisasi Kolom
     st.write("### Visualisasi Kolom Dataset:")
