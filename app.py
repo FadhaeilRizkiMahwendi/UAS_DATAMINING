@@ -12,112 +12,78 @@ import seaborn as sns
 # --- Konfigurasi Aplikasi ---
 st.set_page_config(page_title="Aplikasi Klasifikasi Data Pasien", layout="wide")
 
+# --- Styling Custom untuk Tampilan ---
+st.markdown(
+    """
+    <style>
+    /* Styling Header */
+    .main-header {
+        font-size: 45px;
+        font-weight: bold;
+        color: #4CAF50;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
 
-# Tambahkan Pilihan Tema di Sidebar
-theme = st.sidebar.radio("Pilih Tema Tampilan:", ["Light Mode", "Dark Mode"])
+    /* Styling Sidebar */
+    .sidebar .sidebar-content {
+        background-color: #f4f4f4;
+        padding: 20px;
+    }
 
-if theme == "Light Mode":
-    st.markdown(
-        """
-        <style>
-        /* Styling Header */
-        .main-header {
-            font-size: 45px;
-            font-weight: bold;
-            color: #4CAF50;
-            text-align: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
+    /* Custom Font */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+    html, body, [class*="css"] {
+        font-family: 'Roboto', sans-serif;
+    }
 
-        /* Light Mode Background */
-        body {
-            background-color: #ffffff;
-            color: black;
-        }
+    /* Button Styling */
+    div.stButton > button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    div.stButton > button:hover {
+        background-color: #45a049;
+    }
 
-        /* Light Mode Sidebar */
-        .sidebar .sidebar-content {
-            background-color: #f4f4f4;
-            color: black;
-        }
+    /* Table Styling */
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+    th, td {
+        text-align: left;
+        padding: 8px;
+        border: 1px solid #ddd;
+    }
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
 
-        /* Light Mode Button */
-        div.stButton > button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        div.stButton > button:hover {
-            background-color: #45a049;
-        }
-
-        /* Footer */
-        .footer {
-            background-color: #f4f4f4;
-            color: #888;
-            text-align: center;
-            padding: 10px 20px;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-elif theme == "Dark Mode":
-    st.markdown(
-        """
-        <style>
-        /* Styling Header */
-        .main-header {
-            font-size: 45px;
-            font-weight: bold;
-            color: #FFD700;
-            text-align: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-
-        /* Dark Mode Background */
-        body {
-            background-color: #121212;
-            color: white;
-        }
-
-        /* Dark Mode Sidebar */
-        .sidebar .sidebar-content {
-            background-color: #333333;
-            color: white;
-        }
-
-        /* Dark Mode Button */
-        div.stButton > button {
-            background-color: #FFD700;
-            color: black;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        div.stButton > button:hover {
-            background-color: #FFA500;
-        }
-
-        /* Footer */
-        .footer {
-            background-color: #333333;
-            color: #ccc;
-            text-align: center;
-            padding: 10px 20px;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
+    /* Footer Styling */
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #f4f4f4;
+        padding: 10px 20px;
+        text-align: center;
+        font-size: 14px;
+        color: #888;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
 
 # Tambahkan Informasi Pengembang
@@ -125,7 +91,7 @@ st.sidebar.markdown("## 👨‍💻 Tentang Pengembang")
 st.sidebar.markdown("""
 - Nama: Fadhaeil Rizki Mahwendi
 - NIM: 211220095
-- Email: [Email ke saya](mailto:211220095@unmuhpnk.ac.id)
+- Email: [Email ke](mailto:211220095@unmuhpnk.ac.id)
 - Github : [Link Github saya](https://github.com/FadhaeilRizkiMahwendi)
 """)
 
@@ -230,7 +196,7 @@ menu = st.radio(
 if menu == "Home":
     st.write("## Selamat Datang di Aplikasi Klasifikasi Data Pasien!")
     st.write("""
-    Aplikasi ini dirancang untuk membantu Anda melakukan analisis klasifikasi data pasien.
+    Aplikasi ini dirancang untuk membantu Anda melakukan analisis klasifikasi data pasien. Aplikasi ini menggunakan algoritma **Random Forest Classifier** sebagai algoritma pembelajaran mesin utama untuk melakukan klasifikasi data pasien.
     Anda dapat menggunakan aplikasi ini untuk:
     - Melatih model machine learning menggunakan dataset yang Anda miliki.
     - Melakukan prediksi data pasien baru berdasarkan input tertentu.
@@ -239,7 +205,7 @@ if menu == "Home":
     - Menjelajahi pentingnya fitur-fitur dalam prediksi (Feature Importance).
     - Mencoba algoritma machine learning model lain untuk di coba
     
-    Gunakan navigasi di atas untuk mengakses setiap fitur aplikasi. Selamat mencoba! 🎉
+    **Gunakan navigasi di atas untuk mengakses setiap fitur aplikasi. Selamat mencoba!** 🎉
     """)
 
     st.write("### Informasi Dataset yang Digunakan:")
@@ -695,8 +661,8 @@ elif menu == "Help":
     - Tabel dan grafik feature importance ditampilkan untuk memudahkan interpretasi.
     """)
 
-    # Penjelasan Pemilihan Model
-    st.write("### 8. Pemilihan Model")
+    # Penjelasan Coba Model Lain
+    st.write("### 8. Coba Model Lain")
     st.write("""
     Halaman ini memberikan fleksibilitas dalam memilih algoritma machine learning.
     - Pilih model seperti Random Forest, Logistic Regression, KNN, atau SVM.
